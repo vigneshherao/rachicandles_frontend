@@ -10,8 +10,9 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { Link } from "react-router-dom";
 
-const pages = ["Home", "Shop", "About"];
+const pages = ["Shop", "About"];
 
 const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -85,9 +86,16 @@ const NavBar = () => {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: "block", md: "none" } }}
             >
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography sx={{ textAlign: "center" }}>
+                  <Link to={"/"}>Home</Link>
+                </Typography>
+              </MenuItem>
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography sx={{ textAlign: "center" }}>{page}</Typography>
+                  <Typography sx={{ textAlign: "center" }}>
+                    <Link to={page}>{page}</Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -118,6 +126,18 @@ const NavBar = () => {
               pr: { md: 10 },
             }}
           >
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{
+                my: 2,
+                color: "black",
+                display: "block",
+                fontFamily: "cursive",
+                fontWeight: 550,
+              }}
+            >
+              <Link to={"/"}> Home</Link>
+            </Button>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -130,7 +150,7 @@ const NavBar = () => {
                   fontWeight: 550,
                 }}
               >
-                {page}
+                <Link to={page}> {page}</Link>
               </Button>
             ))}
           </Box>
