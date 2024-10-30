@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import { Link } from "react-router-dom";
+import Category from "./Category";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -17,6 +18,7 @@ const HomePage = () => {
 
   return (
     <div className="py-8 px-5 md:px-20 min-h-screen">
+      <Category />
       <div className="text-center mb-5">
         <h1 className="text-xl md:text-4xl text-gray-700 font-semibold">
           Diwali, Christmas & New Year Candles Are Here!

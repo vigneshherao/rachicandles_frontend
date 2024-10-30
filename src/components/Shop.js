@@ -4,13 +4,16 @@ import { Link } from "react-router-dom";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [category]);
 
   const fetchProducts = async () => {
-    const fetchproductData = await fetch("http://localhost:5000/products");
+    const fetchproductData = await fetch(
+      `http://localhost:5000/products/${category}`
+    );
     const productList = await fetchproductData.json();
     setProducts(productList?.data);
   };
@@ -26,6 +29,21 @@ const Shop = () => {
           occasion.
         </p>
       </div>
+      <div className="flex justify-center gap-5 mb-2">
+        <button
+          className="border border-black py-1 px-5"
+          onClick={() => setCategory("candles")}
+        >
+          Candles
+        </button>
+        <button
+          className="border border-black py-1 px-5"
+          onClick={() => setCategory("sweets")}
+        >
+          Sweet
+        </button>
+      </div>
+
       <div className="flex flex-wrap items-center justify-evenly">
         {products.map((product) => {
           return (
