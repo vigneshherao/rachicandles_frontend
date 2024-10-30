@@ -3,6 +3,7 @@ import HomePage from "./components/HomePage";
 import Header from "./components/Header";
 import Shop from "./components/Shop";
 import About from "./components/About";
+import Login from "./components/Login";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -21,6 +22,10 @@ function App() {
         {
           path: "/About",
           element: <About />,
+        },
+        {
+          path: "/Login",
+          element: <Login />,
         },
       ],
     },

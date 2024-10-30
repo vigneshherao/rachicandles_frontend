@@ -56,7 +56,7 @@ const NavBar = () => {
               pl: { md: 10 },
             }}
           >
-            Rachi Candles
+            <Link to={"/"}>Rachi Candles</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -153,6 +153,18 @@ const NavBar = () => {
                 <Link to={page}> {page}</Link>
               </Button>
             ))}
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{
+                my: 2,
+                color: "black",
+                display: "block",
+                fontFamily: "cursive",
+                fontWeight: 550,
+              }}
+            >
+              <Link to={"/Login"}> Admin</Link>
+            </Button>
           </Box>
         </Toolbar>
       </Container>
