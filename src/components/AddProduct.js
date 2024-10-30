@@ -7,6 +7,7 @@ const AddProduct = ({ isAddView, addProductToList }) => {
   const description = useRef(null);
   const image = useRef(null);
   const price = useRef(null);
+  const category = useRef(null);
 
   const handleClose = (e) => {
     e.preventDefault();
@@ -15,14 +16,14 @@ const AddProduct = ({ isAddView, addProductToList }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newProduct = await AddProductCall();
+    const newProduct = await addProductCall();
     if (newProduct) {
       addProductToList(newProduct);
       handleClose(e);
     }
   };
 
-  const AddProductCall = async () => {
+  const addProductCall = async () => {
     try {
       const response = await fetch("http://localhost:5000/add/product", {
         method: "POST",
@@ -36,6 +37,7 @@ const AddProduct = ({ isAddView, addProductToList }) => {
           description: description.current.value,
           image: image.current.value,
           price: parseFloat(price.current.value),
+          category: category.current.value,
         }),
       });
       const data = await response.json();
@@ -94,6 +96,15 @@ const AddProduct = ({ isAddView, addProductToList }) => {
               ref={image}
               placeholder="Image URL"
             />
+            <div className="flex justify-center gap-5 mb-2">
+              <label htmlFor="category" className="mr-2">
+                Choose a category:
+              </label>
+              <select id="category" ref={category}>
+                <option value="candles">Candles</option>
+                <option value="sweets">Sweets</option>
+              </select>
+            </div>
           </div>
           <button
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-200"
