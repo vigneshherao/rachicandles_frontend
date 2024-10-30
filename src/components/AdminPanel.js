@@ -1,7 +1,74 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import AddProduct from "./AddProduct";
 
 const AdminPanel = () => {
-  return <div>AdminPanel</div>;
+  const [products, setProducts] = useState([]);
+  const [isAddView, setIsAddView] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const addProductToList = (newProduct) => {
+    setProducts((prevProducts) => [...prevProducts, newProduct]);
+  };
+
+  const fetchProducts = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/products");
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const productList = await response.json();
+      setProducts(productList?.data || []);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  return (
+    <div className="h-full md:h-full p-4 md:px-20">
+      <div className="flex flex-wrap justify-between mt-10 mb-10 md:mb-20">
+        <div className="border border-gray-500 w-full md:w-[40%] flex justify-between px-10 py-4 bg-gray-100 rounded mb-4 md:mb-0">
+          <h2 className="font-bold">Products Added</h2>
+          <p className="font-semibold">{products.length}</p>
+        </div>
+        <div className="w-full md:w-[40%] flex justify-end px-10 py-4">
+          <button
+            onClick={() => setIsAddView(!isAddView)}
+            className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600 transition"
+          >
+            Add Product
+          </button>
+        </div>
+      </div>
+      <AddProduct isAddView={isAddView} addProductToList={addProductToList} />
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {products.map((product) => (
+          <div className="flex flex-wrap justify-between items-center border border-gray-500 p-4 rounded shadow-lg mb-4">
+            <div className="flex flex-col flex-grow">
+              <h2 className="text-sm mb-2">{product.title}</h2>
+              <img
+                className="w-20 h-20 object-cover mb-2"
+                src={product?.image}
+                alt={product.title}
+              />
+              <p className="text-gray-700">Price: ${product.price}</p>
+            </div>
+            <div className="flex flex-col space-y-2 items-end">
+              <button className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600 transition">
+                Edit
+              </button>
+              <button className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition">
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default AdminPanel;
