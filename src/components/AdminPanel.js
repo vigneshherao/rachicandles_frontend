@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddProduct from "./AddProduct";
+import EditProduct from "./EditProduct";
 
 const AdminPanel = () => {
   const [products, setProducts] = useState([]);
   const [isAddView, setIsAddView] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -56,6 +58,19 @@ const AdminPanel = () => {
     }
   };
 
+  const handleEdit = (product) => {
+    setCurrentProduct(product);
+  };
+
+  const handleUpdate = (updatedProduct) => {
+    console.log("Updating product:", updatedProduct); // Log to confirm update
+    setProducts((prevProducts) =>
+      prevProducts.map((product) =>
+        product._id === updatedProduct._id ? updatedProduct : product
+      )
+    );
+  };
+
   return (
     <div className="h-full md:h-full p-4 md:px-20">
       {error && <div className="text-red-500">{error}</div>}
@@ -74,6 +89,13 @@ const AdminPanel = () => {
         </div>
       </div>
       <AddProduct isAddView={isAddView} addProductToList={addProductToList} />
+      {currentProduct && (
+        <EditProduct
+          product={currentProduct}
+          onClose={() => setCurrentProduct(null)}
+          onUpdate={handleUpdate}
+        />
+      )}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {products.length === 0 ? (
           <p className="col-span-full text-center">No products available.</p>
@@ -93,7 +115,10 @@ const AdminPanel = () => {
                 <p className="text-gray-700">Price: ${product.price}</p>
               </div>
               <div className="flex flex-col space-y-2 items-end">
-                <button className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600 transition">
+                <button
+                  className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600 transition"
+                  onClick={() => handleEdit(product)}
+                >
                   Edit
                 </button>
                 <button
