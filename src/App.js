@@ -5,6 +5,7 @@ import Shop from "./components/Shop";
 import About from "./components/About";
 import Login from "./components/Login";
 import ProductDetails from "./components/ProductDetails";
+import AdminPanel from "./components/AdminPanel";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -31,6 +32,10 @@ function App() {
         {
           path: "/Product/:ProductId",
           element: <ProductDetails />,
+        },
+        {
+          path: "/Admin",
+          element: <AdminPanel />,
         },
       ],
     },
