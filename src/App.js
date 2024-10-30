@@ -6,6 +6,7 @@ import About from "./components/About";
 import Login from "./components/Login";
 import ProductDetails from "./components/ProductDetails";
 import AdminPanel from "./components/AdminPanel";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -44,6 +45,7 @@ function App() {
   return (
     <div className="w-full h-full bg-[#f3e7d9]">
       <RouterProvider router={appRouter} />
+      <ToastContainer />
     </div>
   );
 }
