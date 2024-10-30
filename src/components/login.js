@@ -1,10 +1,17 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/Admin");
+    }
+  }, [navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +37,7 @@ const Login = () => {
       }
 
       const data = await response.json();
-      console.log(response);
+
       navigate("/Admin");
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);

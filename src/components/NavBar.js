@@ -11,6 +11,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
 
 const pages = ["Shop", "About"];
 
@@ -98,6 +99,9 @@ const NavBar = () => {
                   </Typography>
                 </MenuItem>
               ))}
+              <Typography sx={{ textAlign: "center" }}>
+                <Link to={"/Login"}>Login</Link>
+              </Typography>
             </Menu>
           </Box>
           <Typography
@@ -163,7 +167,10 @@ const NavBar = () => {
                 fontWeight: 550,
               }}
             >
-              <Link to={"/Login"}> Admin</Link>
+              <Link to={"/Login"}>
+                {" "}
+                <FaUser className="text-md text-center ml-2" />
+              </Link>
             </Button>
           </Box>
         </Toolbar>
