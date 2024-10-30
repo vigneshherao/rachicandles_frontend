@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Product from "./Product";
 import { Link } from "react-router-dom";
+import Product from "./Product";
 
-const Shop = () => {
+const Recomandtion = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -16,18 +16,12 @@ const Shop = () => {
   };
 
   return (
-    <div className="py-8 px-5 md:px-20 min-h-screen">
-      <div className="text-center mb-5">
-        <h1 className="text-xl md:text-4xl text-gray-700 font-semibold">
-          10% Off! On Every Products
-        </h1>
-        <p className="mt-2 text-gray-600">
-          Discover our exclusive range of handcrafted candles for every
-          occasion.
-        </p>
-      </div>
+    <div className="px-5 md:px-20 mt-10">
+      <h1 className="text-xl md:text-4xl text-gray-700 font-semibold">
+        Similar Products
+      </h1>
       <div className="flex flex-wrap items-center justify-evenly">
-        {products.map((product) => {
+        {products.slice(1, 4).map((product) => {
           return (
             <Link to={`/Product/${product._id}`} key={product._id}>
               <Product product={product} />
@@ -39,4 +33,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default Recomandtion;

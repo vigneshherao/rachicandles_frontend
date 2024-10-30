@@ -19,7 +19,7 @@ const Product = ({ product }) => {
         <p className="text-gray-500 text-sm mt-1">{subtitle}</p>
         <div className="flex justify-center items-baseline mt-2 space-x-2">
           <span className="text-gray-400 line-through text-sm">
-            Rs. {price - 50}
+            Rs. {price + 50}
           </span>
           <span className="text-red-600 font-semibold text-lg">
             Rs. {price}
