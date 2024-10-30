@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const EditProduct = ({ product, onClose, onUpdate }) => {
   const [isFormVisible, setIsFormVisible] = useState(true);
@@ -41,6 +42,7 @@ const EditProduct = ({ product, onClose, onUpdate }) => {
     const updatedProduct = await editProductCall();
     if (updatedProduct) {
       onUpdate(updatedProduct);
+      window.location.reload();
       handleClose(e);
     }
   };
@@ -59,9 +61,11 @@ const EditProduct = ({ product, onClose, onUpdate }) => {
         }
       );
       const data = await response.json();
-      console.log("Updated Product:", data);
+      console.log(data);
+      toast.success(data?.message);
       return data;
     } catch (error) {
+      toast.success("Error!" + error.message);
       console.error("There was a problem with the fetch operation:", error);
     }
   };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AdminPanel = () => {
@@ -54,7 +54,8 @@ const AdminPanel = () => {
       setProducts((prevProducts) =>
         prevProducts.filter((product) => product._id !== productId)
       );
-      toast.success("Product deleted successfully!");
+      const data = await response.json();
+      toast.success(data?.message);
     } catch (error) {
       toast.error("Error deleting product: " + error.message);
       setError(error.message);

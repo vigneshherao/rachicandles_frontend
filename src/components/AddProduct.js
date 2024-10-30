@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { toast } from "react-toastify";
 
 const AddProduct = ({ isAddView, addProductToList }) => {
   const [isFormVisible, setIsFormVisible] = useState(true);
@@ -19,6 +20,7 @@ const AddProduct = ({ isAddView, addProductToList }) => {
     const newProduct = await addProductCall();
     if (newProduct) {
       addProductToList(newProduct);
+      window.location.reload();
       handleClose(e);
     }
   };
@@ -41,8 +43,10 @@ const AddProduct = ({ isAddView, addProductToList }) => {
         }),
       });
       const data = await response.json();
+      toast.success(data.message);
       return data;
     } catch (error) {
+      toast.success("Error!" + error.message);
       console.error("There was a problem with the fetch operation:", error);
     }
   };
