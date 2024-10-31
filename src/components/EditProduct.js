@@ -7,7 +7,6 @@ const EditProduct = ({ product, onClose, onUpdate }) => {
     title: "",
     subtitle: "",
     description: "",
-    image: "",
     price: "",
   });
 
@@ -17,7 +16,6 @@ const EditProduct = ({ product, onClose, onUpdate }) => {
         title: product.title || "",
         subtitle: product.subtitle || "",
         description: product.description || "",
-        image: product.image || "",
         price: product.price || "",
       });
     }
@@ -122,14 +120,6 @@ const EditProduct = ({ product, onClose, onUpdate }) => {
               onChange={handleChange}
               placeholder="Write about Product Description.."
               required
-            />
-            <input
-              className="border rounded-md px-4 py-2 w-full"
-              type="text"
-              name="image"
-              value={formData.image}
-              onChange={handleChange}
-              placeholder="Image URL"
             />
           </div>
           <button
