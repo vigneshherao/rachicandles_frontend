@@ -13,7 +13,7 @@ const ProductDetails = () => {
 
   const fetchProductByID = async () => {
     const productDetails = await fetch(
-      `http://localhost:5000/product/${ProductId}`
+      `${process.env.REACT_APP_API_KEY}/product/${ProductId}`
     );
     const product = await productDetails.json();
     setProduct(product?.data);

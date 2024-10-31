@@ -48,7 +48,7 @@ const EditProduct = ({ product, onClose, onUpdate }) => {
   const editProductCall = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/edit/product/${product._id}`,
+        `${process.env.REACT_APP_API_KEY}/edit/product/${product._id}`,
         {
           method: "PATCH",
           headers: {

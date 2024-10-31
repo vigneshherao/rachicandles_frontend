@@ -5,13 +5,17 @@ import Category from "./Category";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
+  console.log("All Environment Variables:", process.env);
 
+  console.log(process.env.REACT_APP_API_KEY);
   useEffect(() => {
     fetchProducts();
   }, []);
 
   const fetchProducts = async () => {
-    const fetchproductData = await fetch("http://localhost:5000/products");
+    const fetchproductData = await fetch(
+      `${process.env.REACT_APP_API_KEY}/products`
+    );
     const productList = await fetchproductData.json();
     setProducts(productList?.data);
   };

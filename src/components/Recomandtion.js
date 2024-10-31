@@ -10,7 +10,9 @@ const Recomandtion = () => {
   }, []);
 
   const fetchProducts = async () => {
-    const fetchproductData = await fetch("http://localhost:5000/products");
+    const fetchproductData = await fetch(
+      `${process.env.REACT_APP_API_KEY}/products`
+    );
     const productList = await fetchproductData.json();
     setProducts(productList?.data);
   };

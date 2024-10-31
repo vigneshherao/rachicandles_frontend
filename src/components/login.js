@@ -20,17 +20,20 @@ const Login = () => {
 
   const adminApi = async () => {
     try {
-      const response = await fetch("http://localhost:5000/admin/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          email: emailRef.current.value,
-          password: passwordRef.current.value,
-        }),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_KEY}/admin/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
