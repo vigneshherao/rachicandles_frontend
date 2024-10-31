@@ -7,7 +7,7 @@ const Product = ({ product }) => {
       <div className="relative">
         <img
           className="w-full object-cover rounded-t-lg"
-          src={image}
+          src={image.url ? image.url : image}
           alt="product"
         />
         <span className="absolute top-2 left-2 bg-white text-black text-xs font-semibold px-2 py-1 rounded">

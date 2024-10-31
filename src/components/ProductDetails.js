@@ -21,6 +21,8 @@ const ProductDetails = () => {
 
   const { title, price, description, image, subtitle } = product;
 
+  console.log(product);
+
   const handleColorChange = (color) => {
     setSelectedColors((prevColors) =>
       prevColors.includes(color)
@@ -42,14 +44,20 @@ const ProductDetails = () => {
   };
 
   return (
-    <div className="h-full">
+    <div className={!image?.url ? "h-screen" : "h-auto"}>
       <div className="mt-10 sm:m-20 flex flex-col lg:flex-row gap-14 sm:px-28 sm:mb-0 pb-16">
         <div className="lg:w-1/2 flex flex-col items-center gap-6">
-          <img
-            src={image}
-            alt="Product"
-            className="w-full h-auto aspect-square object-cover rounded-sm"
-          />
+          {image?.url ? (
+            <img
+              src={image.url}
+              alt="Product"
+              className="w-full h-auto aspect-square object-cover rounded-sm"
+            />
+          ) : (
+            <div className="h-64 w-full flex items-center justify-center bg-gray-200 rounded-sm">
+              <span className="text-gray-500">Image not available</span>
+            </div>
+          )}
         </div>
         <div className="lg:w-1/2 flex flex-col gap-4 p-4 lg:p-2 bg-white relative">
           <h1 className="text-3xl font-bold mt-2">{title}</h1>
@@ -95,7 +103,8 @@ const ProductDetails = () => {
           </div>
           <p className="p-5 bg-blue-50 rounded-md text-gray-800">
             Candles have been cherished for centuries, serving both practical
-            and aesthetic purposes. Traditionally, they provide light and warmth
+            and aesthetic purposes. Traditionally, they provide light and
+            warmth.
           </p>
         </div>
       </div>

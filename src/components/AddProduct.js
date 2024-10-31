@@ -24,23 +24,43 @@ const AddProduct = ({ isAddView, addProductToList }) => {
     }
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.size > 10 * 1024 * 1024) {
+      toast.error("File size exceeds 10 MB.");
+      e.target.value = null;
+    }
+  };
+
   const addProductCall = async () => {
+    const formData = new FormData();
+    formData.append("file", image.current.files[0]);
+    formData.append("title", title.current.value);
+    formData.append("subtitle", subtitle.current.value);
+    formData.append("description", description.current.value);
+
+    const priceValue = parseFloat(price.current.value);
+
+    if (isNaN(priceValue)) {
+      toast.error("Price must be a valid number.");
+      return;
+    }
+    formData.append("price", priceValue);
+
+    formData.append("category", category.current.value);
+
+    console.log(formData.get("title"));
     try {
       const response = await fetch("http://localhost:5000/add/product", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         credentials: "include",
-        body: JSON.stringify({
-          title: title.current.value,
-          subtitle: subtitle.current.value,
-          description: description.current.value,
-          image: image.current.value,
-          price: parseFloat(price.current.value),
-          category: category.current.value,
-        }),
+        body: formData,
       });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
       const data = await response.json();
       toast.success(data.message);
       setTimeout(() => {
@@ -49,7 +69,7 @@ const AddProduct = ({ isAddView, addProductToList }) => {
       console.log(data);
       return data;
     } catch (error) {
-      toast.success("Please add all the field");
+      toast.error("Error: " + error.message);
     }
   };
 
@@ -98,9 +118,10 @@ const AddProduct = ({ isAddView, addProductToList }) => {
             />
             <input
               className="border rounded-md px-4 py-2 w-full"
-              type="text"
+              type="file"
               ref={image}
-              placeholder="Image URL"
+              accept="image/*"
+              onChange={handleFileChange}
             />
             <div className="flex justify-center gap-5 mb-2">
               <label htmlFor="category" className="mr-2">

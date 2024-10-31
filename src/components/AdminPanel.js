@@ -117,11 +117,18 @@ const AdminPanel = () => {
             >
               <div className="flex flex-col flex-grow">
                 <h2 className="text-sm mb-2">{product.title}</h2>
-                <img
-                  className="w-20 h-20 object-cover mb-2"
-                  src={product?.image}
-                  alt={product.title}
-                />
+
+                {product.image?.url ? (
+                  <img
+                    src={product.image?.url}
+                    alt="Product"
+                    className="w-20 h-20 object-cover mb-2"
+                  />
+                ) : (
+                  <div className="w-20 h-20  mb-2">
+                    <span className="text-gray-500">Image not available</span>
+                  </div>
+                )}
                 <p className="text-gray-700">Price: ${product.price}</p>
               </div>
               <div className="flex flex-col space-y-2 items-end">
