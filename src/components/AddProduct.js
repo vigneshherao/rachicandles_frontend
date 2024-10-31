@@ -20,7 +20,6 @@ const AddProduct = ({ isAddView, addProductToList }) => {
     const newProduct = await addProductCall();
     if (newProduct) {
       addProductToList(newProduct);
-      window.location.reload();
       handleClose(e);
     }
   };
@@ -44,10 +43,13 @@ const AddProduct = ({ isAddView, addProductToList }) => {
       });
       const data = await response.json();
       toast.success(data.message);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+      console.log(data);
       return data;
     } catch (error) {
-      toast.success("Error!" + error.message);
-      console.error("There was a problem with the fetch operation:", error);
+      toast.success("Please add all the field");
     }
   };
 

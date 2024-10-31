@@ -42,7 +42,7 @@ const EditProduct = ({ product, onClose, onUpdate }) => {
     const updatedProduct = await editProductCall();
     if (updatedProduct) {
       onUpdate(updatedProduct);
-      window.location.reload();
+
       handleClose(e);
     }
   };
@@ -61,8 +61,10 @@ const EditProduct = ({ product, onClose, onUpdate }) => {
         }
       );
       const data = await response.json();
-      console.log(data);
       toast.success(data?.message);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
       return data;
     } catch (error) {
       toast.success("Error!" + error.message);

@@ -3,6 +3,7 @@ import AddProduct from "./AddProduct";
 import EditProduct from "./EditProduct";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NoProducts from "./NoProducts";
 
 const AdminPanel = () => {
   const [products, setProducts] = useState([]);
@@ -25,7 +26,7 @@ const AdminPanel = () => {
         throw new Error("Network response was not ok");
       }
       const productList = await response.json();
-      setProducts(productList?.data || []);
+      setProducts(productList.data || []);
     } catch (error) {
       setError(error.message);
     }
@@ -68,7 +69,6 @@ const AdminPanel = () => {
   };
 
   const handleUpdate = (updatedProduct) => {
-    console.log("Updating product:", updatedProduct);
     setProducts((prevProducts) =>
       prevProducts.map((product) =>
         product._id === updatedProduct._id ? updatedProduct : product
@@ -101,11 +101,16 @@ const AdminPanel = () => {
           onUpdate={handleUpdate}
         />
       )}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {products.length === 0 ? (
-          <p className="col-span-full text-center">No products available.</p>
-        ) : (
-          products.map((product) => (
+
+      {products.length === 0 ? (
+        <NoProducts />
+      ) : (
+        <div
+          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ${
+            products.length === 0 ? "h-screen" : "h-auto"
+          }`}
+        >
+          {products.map((product) => (
             <div
               className="flex flex-wrap justify-between items-center border border-gray-500 p-4 rounded shadow-lg mb-4"
               key={product._id}
@@ -134,9 +139,9 @@ const AdminPanel = () => {
                 </button>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
