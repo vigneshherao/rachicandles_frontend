@@ -56,7 +56,7 @@ const About = () => {
         <div className="w-full md:w-1/4 h-24 text-center border border-gray-500 text-black m-2 rounded-lg shadow-lg transition-transform transform hover:scale-105">
           <div className="flex items-center justify-center h-full">
             <CiDeliveryTruck />
-            <p className="text-lg font-semibold ml-2">All India Delivery</p>
+            <p className="text-lg font-semibold ml-2">Global Delivery</p>
           </div>
         </div>
       </div>
