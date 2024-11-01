@@ -1,18 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { setAdmin } from "../utils/productSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
   const navigate = useNavigate();
+  const isAdmin = useSelector((store) => store?.products?.isAdmin);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
+
+    if (token || isAdmin) {
       navigate("/Admin");
     }
-  }, [navigate]);
+  }, [navigate, isAdmin]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,6 +49,10 @@ const Login = () => {
 
       const data = await response.json();
 
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+      dispatch(setAdmin());
       navigate("/Admin");
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
