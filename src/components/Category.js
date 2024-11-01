@@ -5,14 +5,15 @@ const Category = () => {
   return (
     <>
       <div className="text-center mb-5 mt-5">
-        <h1 className="text-xl md:text-4xl text-gray-700 font-semibold">
+        <h1 className="text-2xl md:text-4xl text-gray-700 font-semibold italic">
           Diwali, Christmas & New Year Candles Are Here!
         </h1>
-        <p className="mt-2 text-gray-600">
+        <p className="mt-2 text-gray-600 italic  px-10 md:px-0 text-sm md:text-base">
           Discover our exclusive range of handcrafted candles for every
           occasion.
         </p>
       </div>
+
       <div className="flex justify-center mb-5 md:mb-16">
         <Link to={"/Shop"}>
           <div className="m-0 md:m-3 p-4 w-full sm:w-1/2 md:w-[425px] border border-gray-300 bg-[#f3e7d9]  rounded-lg transform transition-transform hover:scale-105 ">

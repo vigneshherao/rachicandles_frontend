@@ -15,7 +15,7 @@ const HomePage = () => {
 
   const fetchProducts = async () => {
     const fetchproductData = await fetch(
-      `${process.env.REACT_APP_API_KEY}/productss`
+      `${process.env.REACT_APP_API_KEY}/products`
     );
     const productList = await fetchproductData.json();
     setProducts(productList?.data);
@@ -29,7 +29,7 @@ const HomePage = () => {
     <div className="py-8 px-2 md:px-20 min-h-screen">
       <Category />
       <div className="text-center mb-5">
-        <h1 className="text-xl md:text-4xl text-gray-700 font-semibold">
+        <h1 className="text-xl md:text-4xl text-gray-700 font-semibold italic">
           Featured Products
         </h1>
       </div>
