@@ -21,7 +21,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="py-8 px-5 md:px-20 min-h-screen">
+    <div className="py-8 px-2 md:px-20 min-h-screen">
       <Category />
       <div className="text-center mb-5">
         <h1 className="text-xl md:text-4xl text-gray-700 font-semibold">

@@ -34,9 +34,34 @@ const EditProduct = ({ product, onClose, onUpdate }) => {
       [name]: value,
     }));
   };
+  const validateForm = () => {
+    const { title, subtitle, description, price } = formData;
+    if (!title || title.trim().length < 5) {
+      toast.error("Title should be a valid string with at least 5 characters.");
+      return false;
+    }
+    if (!subtitle || subtitle.trim().length < 5) {
+      toast.error(
+        "Subtitle should be a valid string with at least 5 characters."
+      );
+      return false;
+    }
+    if (!description || description.trim().length < 20) {
+      toast.error(
+        "Description should be a valid string with at least 20 characters."
+      );
+      return false;
+    }
+    if (!price || isNaN(price)) {
+      toast.error("Price should be a valid number.");
+      return false;
+    }
+    return true;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
     const updatedProduct = await editProductCall();
     if (updatedProduct) {
       onUpdate(updatedProduct);

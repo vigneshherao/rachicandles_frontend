@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const emailRef = useRef(null);
@@ -36,6 +37,8 @@ const Login = () => {
       );
 
       if (!response.ok) {
+        const errorData = await response.json();
+        toast.error(errorData.error || "Please check admin");
         throw new Error("Network response was not ok");
       }
 

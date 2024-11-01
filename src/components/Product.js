@@ -3,10 +3,10 @@ import React from "react";
 const Product = ({ product }) => {
   const { title, subtitle, price, image } = product;
   return (
-    <div className="m-3 p-4 w-full sm:w-1/2 md:w-[425px] border border-gray-300 bg-[#f3e7d9]  rounded-lg transform transition-transform hover:scale-105 ">
-      <div className="relative">
+    <div className="my-3 mx-0 md:m-3 p-4 w-full sm:w-1/2 md:w-[425px] border border-gray-300 bg-[#f3e7d9]  rounded-lg transform transition-transform hover:scale-105 ">
+      <div className="relative h-[300px w-[300px] md:h-[391px] md:w-[391px]">
         <img
-          className="w-full object-cover rounded-t-lg"
+          className="w-full h-full object-cover rounded-t-lg"
           src={image.url ? image.url : image}
           alt="product"
         />

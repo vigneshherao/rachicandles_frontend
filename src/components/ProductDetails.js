@@ -46,7 +46,7 @@ const ProductDetails = () => {
   return (
     <div className={!image?.url ? "h-screen" : "h-auto"}>
       <div className="mt-10 sm:m-20 flex flex-col lg:flex-row gap-14 sm:px-28 sm:mb-0 pb-16">
-        <div className="lg:w-1/2 flex flex-col items-center gap-6">
+        <div className="px-5 md:px-0  lg:w-1/2 flex flex-col items-center gap-6">
           {image?.url ? (
             <img
               src={image.url}

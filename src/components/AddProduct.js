@@ -32,6 +32,41 @@ const AddProduct = ({ isAddView, addProductToList }) => {
     }
   };
 
+  const productValidate = (formData, toast) => {
+    const title = formData.get("title");
+    const subtitle = formData.get("subtitle");
+    const price = formData.get("price");
+    const description = formData.get("description");
+
+    if (!title || title.trim().length === 0 || title.length < 5) {
+      toast.error("Title should be a valid string with at least 5 characters.");
+      throw new Error("Validation error: Title is invalid.");
+    }
+
+    if (!subtitle || subtitle.trim().length === 0 || subtitle.length < 5) {
+      toast.error(
+        "Subtitle should be a valid string with at least 5 characters."
+      );
+      throw new Error("Validation error: Subtitle is invalid.");
+    }
+
+    if (
+      !description ||
+      description.trim().length === 0 ||
+      description.length < 20
+    ) {
+      toast.error(
+        "Description should be a valid string with at least 20 characters."
+      );
+      throw new Error("Validation error: Description is invalid.");
+    }
+
+    if (!price || isNaN(price)) {
+      toast.error("Price should be a valid number.");
+      throw new Error("Validation error: Price is invalid.");
+    }
+  };
+
   const addProductCall = async () => {
     const formData = new FormData();
     formData.append("file", image.current.files[0]);
@@ -49,8 +84,8 @@ const AddProduct = ({ isAddView, addProductToList }) => {
 
     formData.append("category", category.current.value);
 
-    console.log(formData.get("title"));
     try {
+      productValidate(formData, toast);
       const response = await fetch(
         `${process.env.REACT_APP_API_KEY}/add/product`,
         {
@@ -61,7 +96,10 @@ const AddProduct = ({ isAddView, addProductToList }) => {
       );
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorData = await response.json();
+        console.log(errorData);
+        toast.error(errorData.error || "Please check the form");
+        throw new Error("Error while adding product");
       }
 
       const data = await response.json();
@@ -72,7 +110,7 @@ const AddProduct = ({ isAddView, addProductToList }) => {
       console.log(data);
       return data;
     } catch (error) {
-      toast.error("Error: " + error.message);
+      console.error("There was a problem with the add operation:", error);
     }
   };
 

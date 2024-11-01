@@ -15,10 +15,10 @@ const Category = () => {
       </div>
       <div className="flex justify-center mb-5 md:mb-16">
         <Link to={"/Shop"}>
-          <div className="m-3 p-4 w-full sm:w-1/2 md:w-[425px] border border-gray-300 bg-[#f3e7d9]  rounded-lg transform transition-transform hover:scale-105 ">
-            <div className="relative">
+          <div className="m-0 md:m-3 p-4 w-full sm:w-1/2 md:w-[425px] border border-gray-300 bg-[#f3e7d9]  rounded-lg transform transition-transform hover:scale-105 ">
+            <div className="relative h-[126px] md:h-auto">
               <img
-                className="w-full object-cover rounded-t-lg"
+                className="w-full h-full object-cover rounded-t-lg"
                 src="https://m.media-amazon.com/images/I/71umCKnKw3L._AC_UF894,1000_QL80_.jpg"
                 alt="product"
               />
@@ -29,10 +29,10 @@ const Category = () => {
           </div>
         </Link>
         <Link to={"/Shop"}>
-          <div className="m-3 p-4 w-full sm:w-1/2 md:w-[425px] border border-gray-300 bg-[#f3e7d9]  rounded-lg transform transition-transform hover:scale-105 ">
-            <div className="relative">
+          <div className="m-0 md:m-3 p-4 w-full sm:w-1/2 md:w-[425px] border border-gray-300 bg-[#f3e7d9]  rounded-lg transform transition-transform hover:scale-105 ">
+            <div className="relative  h-[126px] md:h-auto">
               <img
-                className="w-full object-cover rounded-t-lg"
+                className="w-full h-full object-cover rounded-t-lg"
                 src="https://www.distacart.com/cdn/shop/products/sOpnT0cv7e_1280x.jpg?v=1704721454"
                 alt="product"
               />
