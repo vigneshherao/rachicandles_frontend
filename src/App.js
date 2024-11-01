@@ -7,6 +7,8 @@ import Login from "./components/Login";
 import ProductDetails from "./components/ProductDetails";
 import AdminPanel from "./components/AdminPanel";
 import { ToastContainer } from "react-toastify";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -44,8 +46,10 @@ function App() {
 
   return (
     <div className="w-full h-full bg-[#f3e7d9]">
-      <RouterProvider router={appRouter} />
-      <ToastContainer />
+      <Provider store={appStore}>
+        <RouterProvider router={appRouter} />
+        <ToastContainer />
+      </Provider>
     </div>
   );
 }

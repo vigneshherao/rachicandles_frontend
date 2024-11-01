@@ -3,22 +3,25 @@ import Product from "./Product";
 import { Link } from "react-router-dom";
 import Category from "./Category";
 import Shimmer from "./Shimmer";
+import { useDispatch, useSelector } from "react-redux";
+import { addProducts } from "../utils/productSlice";
 
 const HomePage = () => {
-  const [products, setProducts] = useState([]);
-  console.log("All Environment Variables:", process.env);
+  const dispatch = useDispatch();
+  const products = useSelector((store) => store?.products?.productsList);
 
-  console.log(process.env.REACT_APP_API_KEY);
   useEffect(() => {
-    fetchProducts();
-  }, []);
+    if (!products || products.length === 0) {
+      fetchProducts();
+    }
+  }, [products]);
 
   const fetchProducts = async () => {
     const fetchproductData = await fetch(
       `${process.env.REACT_APP_API_KEY}/products`
     );
     const productList = await fetchproductData.json();
-    setProducts(productList?.data);
+    dispatch(addProducts(productList?.data));
   };
 
   if (!products || products.length === 0) {
