@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import { Link } from "react-router-dom";
 import Category from "./Category";
+import Shimmer from "./Shimmer";
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -14,11 +15,15 @@ const HomePage = () => {
 
   const fetchProducts = async () => {
     const fetchproductData = await fetch(
-      `${process.env.REACT_APP_API_KEY}/products`
+      `${process.env.REACT_APP_API_KEY}/productss`
     );
     const productList = await fetchproductData.json();
     setProducts(productList?.data);
   };
+
+  if (!products || products.length === 0) {
+    return <Shimmer number={9} />;
+  }
 
   return (
     <div className="py-8 px-2 md:px-20 min-h-screen">

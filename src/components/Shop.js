@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import { Link } from "react-router-dom";
+import Shimmer from "./Shimmer";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -17,6 +18,10 @@ const Shop = () => {
     const productList = await fetchproductData.json();
     setProducts(productList?.data);
   };
+
+  if (!products || products.length === 0) {
+    return <Shimmer number={9} />;
+  }
 
   return (
     <div className="py-8 px-5 md:px-20 min-h-screen">
